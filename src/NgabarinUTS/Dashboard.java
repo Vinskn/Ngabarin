@@ -64,8 +64,10 @@ public class Dashboard extends javax.swing.JFrame {
         for (int i = 0; i < 5; i++) {
             Dash_cardEvt cardList = new Dash_cardEvt();
             mainPanel.add(cardList);
-        }       
+            mainPanel.add(Box.createVerticalStrut(10));
+        }
     }
+    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -101,6 +103,8 @@ public class Dashboard extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(830, 500));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         getContentPane().add(navbar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        jScrollPane1.setBorder(null);
 
         mainPanel.setLayout(new javax.swing.BoxLayout(mainPanel, javax.swing.BoxLayout.LINE_AXIS));
 
@@ -149,7 +153,7 @@ public class Dashboard extends javax.swing.JFrame {
                     .addGroup(headerPanelLayout.createSequentialGroup()
                         .addGap(21, 21, 21)
                         .addComponent(dummyAddEvt, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(386, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         mainPanel.add(headerPanel);
@@ -222,12 +226,12 @@ public class Dashboard extends javax.swing.JFrame {
                     .addGroup(summaryLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(jLayeredPane4)))
-                .addContainerGap(153, Short.MAX_VALUE))
+                .addContainerGap(155, Short.MAX_VALUE))
         );
 
         mainPanel.add(summary);
 
-        recentEvt.setPreferredSize(new java.awt.Dimension(586, 999));
+        recentEvt.setPreferredSize(new java.awt.Dimension(586, 80));
 
         jLabel4.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 153, 153));
@@ -241,11 +245,10 @@ public class Dashboard extends javax.swing.JFrame {
         recentEvtLayout.setHorizontalGroup(
             recentEvtLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(recentEvtLayout.createSequentialGroup()
-                .addGap(45, 45, 45)
+                .addContainerGap()
                 .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 312, Short.MAX_VALUE)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 390, Short.MAX_VALUE)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         recentEvtLayout.setVerticalGroup(
             recentEvtLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -254,7 +257,7 @@ public class Dashboard extends javax.swing.JFrame {
                 .addGroup(recentEvtLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jLabel5))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         mainPanel.add(recentEvt);
@@ -269,11 +272,8 @@ public class Dashboard extends javax.swing.JFrame {
     
     
     public static void main(String args[]) {
-        try {
-            UIManager.setLookAndFeel(new FlatLightLaf());
-         } catch (Exception e) {
-            System.err.println("Failed to initialize LaF");
-        }
+        FlatLightLaf.setup();
+        UIManager.put( "ProgressBar.arc", 999 );
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {

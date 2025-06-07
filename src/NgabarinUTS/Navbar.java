@@ -7,7 +7,7 @@ import java.awt.Panel;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
-public class Navbar extends javax.swing.JPanel {
+public class Navbar extends javax.swing.JPanel {   
     public Navbar() {
         initComponents();
         
@@ -54,8 +54,32 @@ public class Navbar extends javax.swing.JPanel {
         keluarBtn.putClientProperty( "JButton.buttonType", "roundRect" );
     }
     
+    private void resetButtonStyle() {
+        Color defaultColor = Color.decode("#F0F0F0");
+        dashboardBtn.setBackground(defaultColor);
+        dashboardBtn.setOpaque(false);
+        dashboardBtn.setForeground(Color.white);
+        eventBtn.setBackground(defaultColor);
+        eventBtn.setOpaque(false);
+        eventBtn.setForeground(Color.white);
+        divisiBtn.setBackground(defaultColor);
+        divisiBtn.setOpaque(false);
+        divisiBtn.setForeground(Color.white);
+        manageBtn.setBackground(defaultColor);
+        manageBtn.setOpaque(false);
+        manageBtn.setForeground(Color.white);
+        progressBtn.setBackground(defaultColor);
+        progressBtn.setOpaque(false);
+        progressBtn.setForeground(Color.white);
+        laporanBtn.setBackground(defaultColor);
+        laporanBtn.setOpaque(false);
+        laporanBtn.setForeground(Color.white);
+        pengaturanBtn.setBackground(defaultColor);
+        pengaturanBtn.setOpaque(false);
+        pengaturanBtn.setForeground(Color.white);
+    }
 
-  
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -78,42 +102,79 @@ public class Navbar extends javax.swing.JPanel {
         dashboardBtn.setFont(new java.awt.Font("MS Reference Sans Serif", 0, 14)); // NOI18N
         dashboardBtn.setForeground(new java.awt.Color(255, 255, 255));
         dashboardBtn.setText("Dashboard");
+        dashboardBtn.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 20, 1, 1));
         dashboardBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 dashboardBtnMouseClicked(evt);
             }
         });
-        add(dashboardBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 118, 220, 33));
+        add(dashboardBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 118, 230, 33));
 
         pengaturanBtn.setFont(new java.awt.Font("MS Reference Sans Serif", 0, 14)); // NOI18N
         pengaturanBtn.setForeground(new java.awt.Color(255, 255, 255));
         pengaturanBtn.setText("Pengaturan");
-        add(pengaturanBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 360, 220, 33));
+        pengaturanBtn.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 20, 1, 1));
+        pengaturanBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pengaturanBtnMouseClicked(evt);
+            }
+        });
+        add(pengaturanBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 360, 230, 33));
 
         eventBtn.setFont(new java.awt.Font("MS Reference Sans Serif", 0, 14)); // NOI18N
         eventBtn.setForeground(new java.awt.Color(255, 255, 255));
         eventBtn.setText("Event Saya");
-        add(eventBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 157, 220, 33));
+        eventBtn.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 20, 1, 1));
+        eventBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                eventBtnMouseClicked(evt);
+            }
+        });
+        add(eventBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 157, 230, 33));
 
         divisiBtn.setFont(new java.awt.Font("MS Reference Sans Serif", 0, 14)); // NOI18N
         divisiBtn.setForeground(new java.awt.Color(255, 255, 255));
         divisiBtn.setText("Divisi & Anggota");
-        add(divisiBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 220, 33));
+        divisiBtn.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 20, 1, 1));
+        divisiBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                divisiBtnMouseClicked(evt);
+            }
+        });
+        add(divisiBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 230, 33));
 
         manageBtn.setFont(new java.awt.Font("MS Reference Sans Serif", 0, 14)); // NOI18N
         manageBtn.setForeground(new java.awt.Color(255, 255, 255));
         manageBtn.setText("Manajemen Tugas");
-        add(manageBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, 220, 33));
+        manageBtn.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 20, 1, 1));
+        manageBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                manageBtnMouseClicked(evt);
+            }
+        });
+        add(manageBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 230, 33));
 
         progressBtn.setFont(new java.awt.Font("MS Reference Sans Serif", 0, 14)); // NOI18N
         progressBtn.setForeground(new java.awt.Color(255, 255, 255));
         progressBtn.setText("Progress Tugas");
-        add(progressBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, 220, 33));
+        progressBtn.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 20, 1, 1));
+        progressBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                progressBtnMouseClicked(evt);
+            }
+        });
+        add(progressBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 280, 230, 33));
 
         laporanBtn.setFont(new java.awt.Font("MS Reference Sans Serif", 0, 14)); // NOI18N
         laporanBtn.setForeground(new java.awt.Color(255, 255, 255));
         laporanBtn.setText("Laporan");
-        add(laporanBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, 220, 33));
+        laporanBtn.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 20, 1, 1));
+        laporanBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                laporanBtnMouseClicked(evt);
+            }
+        });
+        add(laporanBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 230, 33));
         add(logo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, 130, 60));
 
         jLabel1.setFont(new java.awt.Font("MS Reference Sans Serif", 0, 12)); // NOI18N
@@ -125,11 +186,6 @@ public class Navbar extends javax.swing.JPanel {
 
         keluarBtn.setText("Keluar");
         keluarBtn.setBorder(null);
-        keluarBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                keluarBtnActionPerformed(evt);
-            }
-        });
         add(keluarBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 443, 210, 30));
 
         navBg.setBackground(new java.awt.Color(0, 0, 255));
@@ -138,12 +194,53 @@ public class Navbar extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void dashboardBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dashboardBtnMouseClicked
-        JOptionPane.showMessageDialog(eventBtn, "PPP");
+        resetButtonStyle();
+        dashboardBtn.setOpaque(true);
+        dashboardBtn.setBackground(Color.decode("#CED9E4"));
+        dashboardBtn.setForeground(Color.black);
     }//GEN-LAST:event_dashboardBtnMouseClicked
 
-    private void keluarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_keluarBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_keluarBtnActionPerformed
+    private void eventBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eventBtnMouseClicked
+        resetButtonStyle();
+        eventBtn.setOpaque(true);
+        eventBtn.setBackground(Color.decode("#CED9E4"));
+        eventBtn.setForeground(Color.black);
+    }//GEN-LAST:event_eventBtnMouseClicked
+
+    private void divisiBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_divisiBtnMouseClicked
+        resetButtonStyle();
+        divisiBtn.setOpaque(true);
+        divisiBtn.setBackground(Color.decode("#CED9E4"));
+        divisiBtn.setForeground(Color.black);
+    }//GEN-LAST:event_divisiBtnMouseClicked
+
+    private void manageBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageBtnMouseClicked
+        resetButtonStyle();
+        manageBtn.setOpaque(true);
+        manageBtn.setBackground(Color.decode("#CED9E4"));
+        manageBtn.setForeground(Color.black);
+    }//GEN-LAST:event_manageBtnMouseClicked
+
+    private void progressBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_progressBtnMouseClicked
+        resetButtonStyle();
+        progressBtn.setOpaque(true);
+        progressBtn.setBackground(Color.decode("#CED9E4"));
+        progressBtn.setForeground(Color.black);
+    }//GEN-LAST:event_progressBtnMouseClicked
+
+    private void laporanBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_laporanBtnMouseClicked
+        resetButtonStyle();
+        laporanBtn.setOpaque(true);
+        laporanBtn.setBackground(Color.decode("#CED9E4"));
+        laporanBtn.setForeground(Color.black);
+    }//GEN-LAST:event_laporanBtnMouseClicked
+
+    private void pengaturanBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pengaturanBtnMouseClicked
+        resetButtonStyle();
+        pengaturanBtn.setOpaque(true);
+        pengaturanBtn.setBackground(Color.decode("#CED9E4"));
+        pengaturanBtn.setForeground(Color.black);
+    }//GEN-LAST:event_pengaturanBtnMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
