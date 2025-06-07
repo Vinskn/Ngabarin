@@ -4,6 +4,7 @@
  */
 package NgabarinUTS;
 
+import utils.RoundedBorder;
 import java.awt.Color;
 import java.awt.Image;
 import javax.swing.ImageIcon;
@@ -28,6 +29,24 @@ public class Signup extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         getContentPane().setBackground(Color.WHITE);
         
+        namaDpn.putClientProperty("JTextField.placeholderText", "Masukan Nama Depan");
+        namaDpn.setBorder(new RoundedBorder(Color.GRAY, 10, 1));
+         
+        namaBlkg.putClientProperty("JTextField.placeholderText", "Masukan Nama Belakang");
+        namaBlkg.setBorder(new RoundedBorder(Color.GRAY, 10, 1));
+        
+        email.putClientProperty("JTextField.placeholderText", "ex: user@gmail.com");
+        email.setBorder(new RoundedBorder(Color.GRAY, 10, 1));
+        
+        username.putClientProperty("JTextField.placeholderText", "Pilih Username Unik");
+        username.setBorder(new RoundedBorder(Color.GRAY, 10, 1));
+        
+        password.putClientProperty("JTextField.placeholderText", "Masukan password yang kuat");
+        password.setBorder(new RoundedBorder(Color.GRAY, 10, 1));
+        
+        confirmPass.putClientProperty("JTextField.placeholderText", "Ulangi Password");
+        confirmPass.setBorder(new RoundedBorder(Color.GRAY, 10, 1));
+        
         // formating bg               
         bg_left.setIcon(new ImageIcon(
             new ImageIcon(getClass().getResource("assets/Rectangle 1.png"))
@@ -46,15 +65,6 @@ public class Signup extends javax.swing.JFrame {
                .getImage()
                .getScaledInstance(submitBtn.getWidth(), submitBtn.getHeight(), Image.SCALE_SMOOTH) 
         ));
-        
-        
-        //styling
-        namaDpn.setBorder(new RoundedBorder(Color.GRAY, 10, 1));
-        namaBlkg.setBorder(new RoundedBorder(Color.GRAY, 10, 1));
-        email.setBorder(new RoundedBorder(Color.GRAY, 10, 1));
-        username.setBorder(new RoundedBorder(Color.GRAY, 10, 1));
-        password.setBorder(new RoundedBorder(Color.GRAY, 10, 1));
-        confirmPass.setBorder(new RoundedBorder(Color.GRAY, 10, 1));
     }
 
     /**
