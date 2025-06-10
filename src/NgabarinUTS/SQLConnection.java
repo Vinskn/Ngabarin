@@ -6,33 +6,39 @@ package NgabarinUTS;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-/**
- *
- * @author Svin
- */
 public class SQLConnection {
-    Connection con;
-    public SQLConnection(){
-        String id, pass, driver, url;
-        id = "root";
-        pass = "";
-        driver = "com.mysql.cj.jdbc.Driver";
-        url = "jdbc:mysql://localhost:3306/ngabarin";
-        
+    public Connection con;
+
+    public SQLConnection() {
+        String id = "root";
+        String pass = "";
+        String driver = "com.mysql.cj.jdbc.Driver";
+        String url = "jdbc:mysql://localhost:3306/ngabarin?useSSL=false&serverTimezone=UTC";
+
         try {
             Class.forName(driver).newInstance();
             con = DriverManager.getConnection(url, id, pass);
-            if (con == null) {
-                System.out.println("Koneksi gagal");
-                return;
+
+            if (con != null) {
+                System.out.println("✅ Koneksi berhasil");
+            } else {
+                System.out.println("❌ Koneksi gagal");
             }
-            System.out.println("Koneksi berhasil");
+
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println("❌ ERROR koneksi: " + e.getMessage());
+            con = null;
         }
     }
-    
+
+    // ⬇️ Tambahkan ini di bagian bawah
     public static void main(String[] args){
         SQLConnection k = new SQLConnection();
+        if (k.con == null) {
+            System.out.println("❌ Masih gagal koneksi. Cek pengaturan.");
+        } else {
+            System.out.println("✅ Tes koneksi berhasil.");
+        }
     }
 }
+
