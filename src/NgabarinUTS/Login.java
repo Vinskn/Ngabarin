@@ -9,14 +9,16 @@ import javax.swing.JOptionPane;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.swing.UIManager;
+import utils.GlobalState;
+import utils.SupabaseAPI;
 
 public class Login extends javax.swing.JFrame {
     SQLConnection connect;
     
     public Login() {
-        connect = new SQLConnection();
+        
         initComponents();        
-        setSize(830, 500); 
+        setSize(1120, 820); 
         setResizable(false);
         setLocationRelativeTo(null);
         getContentPane().setBackground(Color.WHITE);
@@ -76,29 +78,32 @@ public class Login extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 153, 153));
+        setPreferredSize(new java.awt.Dimension(1120, 820));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         titleImg.setBackground(new java.awt.Color(255, 102, 102));
-        getContentPane().add(titleImg, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, 230, 230));
+        getContentPane().add(titleImg, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 150, 360, 350));
 
         bg_left.setBackground(new java.awt.Color(0, 204, 204));
         bg_left.setForeground(new java.awt.Color(255, 255, 255));
         bg_left.setOpaque(true);
-        getContentPane().add(bg_left, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 440, 500));
+        getContentPane().add(bg_left, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 800));
 
         welcome.setBackground(new java.awt.Color(255, 255, 153));
-        getContentPane().add(welcome, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 40, 340, 50));
+        getContentPane().add(welcome, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 90, 370, 90));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(51, 51, 51));
         jLabel1.setText("Username ");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 140, -1, -1));
-        getContentPane().add(username, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 160, 320, 40));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 250, -1, -1));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        username.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        getContentPane().add(username, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 270, 450, 50));
+
+        jLabel2.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(51, 51, 51));
         jLabel2.setText("Password");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 210, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 350, 140, -1));
 
         submitBtn.setBackground(new java.awt.Color(0, 255, 255));
         submitBtn.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -106,9 +111,9 @@ public class Login extends javax.swing.JFrame {
                 submitBtnMouseClicked(evt);
             }
         });
-        getContentPane().add(submitBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 310, 270, 30));
+        getContentPane().add(submitBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 530, 300, 50));
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 153, 153));
         jLabel3.setText("Daftar Sekarang");
         jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -116,30 +121,35 @@ public class Login extends javax.swing.JFrame {
                 jLabel3MouseClicked(evt);
             }
         });
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 370, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 600, 160, -1));
 
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(102, 102, 102));
         jLabel4.setText("Lupa Password?");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 280, -1, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 430, -1, -1));
 
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(102, 102, 102));
         jLabel5.setText("Belum punya akun? ");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 370, -1, -1));
-        getContentPane().add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 230, 320, 40));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 600, -1, -1));
+
+        password.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        getContentPane().add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 370, 450, 50));
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void submitBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_submitBtnMouseClicked
-//        if (inputValidation()) {
-//            if (checkAccount()) {
-//                JOptionPane.showMessageDialog(rootPane, "Berhasil");
-//            } else {
-//                JOptionPane.showMessageDialog(rootPane, "GA ADA BROK");
-//            }
-//        }
-        new Dashboard().setVisible(true);
+        if (inputValidation()) {
+            if (checkAccount()) {
+                JOptionPane.showMessageDialog(rootPane, "Berhasil");
+                new Dashboard().setVisible(true);
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "User tidak ditemukan, periksa username dan password atau buat akun", "User tidak ditemukan", JOptionPane.ERROR_MESSAGE);
+            }
+        }
     }//GEN-LAST:event_submitBtnMouseClicked
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
@@ -177,9 +187,15 @@ public class Login extends javax.swing.JFrame {
     private Boolean checkAccount(){
         String query = "SELECT * FROM user_table where username = '"+ username.getText() +"' and password = '"+ password.getText() +"'";
         try {
+            connect = new SQLConnection();
             Statement st = connect.con.createStatement();
             ResultSet res = st.executeQuery(query);
             Boolean found = res.next();
+            
+            if (found) {
+                GlobalState.setUserID(res.getInt("id"));
+                GlobalState.setUsername(res.getString("username"));
+            }
             
             connect.con.close();
             return found;

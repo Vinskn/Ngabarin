@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package NgabarinUTS;
+import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.FlatLightLaf;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import java.awt.BorderLayout;
@@ -19,19 +20,16 @@ import utils.ImageButton;
 import utils.ImageUtils;
 import javax.swing.Box;
 import utils.Dash_cardEvt;
+import utils.GlobalState;
 
 
-/**
- *
- * @author Svin
- */
 public class Dashboard extends javax.swing.JFrame {
     SQLConnection connect;
 
     public Dashboard() {
         connect = new SQLConnection();
         initComponents();        
-        setSize(840, 530);
+        setSize(1120, 820);
         setResizable(false);
         setLocationRelativeTo(null);
         getContentPane().setBackground(Color.WHITE);
@@ -53,6 +51,8 @@ public class Dashboard extends javax.swing.JFrame {
         dummyAddEvt = headerAddEvt;
         headerAddEvt.setFont(new Font("MS Reference Sans Serif", Font.BOLD, 12));
         headerAddEvt.setForeground(Color.WHITE);
+        headerPanel.putClientProperty(FlatClientProperties.STYLE, 
+            "background: #fff; border: 0,0,1,1, #000, 0.1f, 25;");
         
         // setting dashboard summary
         cont_totalEvt.setIcon(new FlatSVGIcon("assets/dash-totalEvt.svg", cont_totalEvt.getWidth() + 5, cont_totalEvt.getHeight() + 5));
@@ -66,6 +66,8 @@ public class Dashboard extends javax.swing.JFrame {
             mainPanel.add(cardList);
             mainPanel.add(Box.createVerticalStrut(10));
         }
+        
+        System.out.println(GlobalState.getUsername());
     }
     
 
@@ -73,7 +75,6 @@ public class Dashboard extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        navbar2 = new NgabarinUTS.Navbar();
         jScrollPane1 = new javax.swing.JScrollPane();
         mainPanel = new javax.swing.JPanel();
         headerPanel = new javax.swing.JPanel();
@@ -97,30 +98,32 @@ public class Dashboard extends javax.swing.JFrame {
         recentEvt = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        navbar1 = new NgabarinUTS.Navbar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(222, 228, 215));
-        setSize(new java.awt.Dimension(830, 500));
+        setPreferredSize(new java.awt.Dimension(1120, 820));
+        setSize(new java.awt.Dimension(1120, 820));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(navbar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         jScrollPane1.setBorder(null);
 
+        mainPanel.setBackground(new java.awt.Color(255, 255, 255));
         mainPanel.setLayout(new javax.swing.BoxLayout(mainPanel, javax.swing.BoxLayout.LINE_AXIS));
 
         headerPanel.setBackground(new java.awt.Color(255, 255, 255));
-        headerPanel.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        headerPanel.setPreferredSize(new java.awt.Dimension(586, 95));
+        headerPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        headerPanel.setPreferredSize(new java.awt.Dimension(780, 150));
 
-        jLabel1.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 36)); // NOI18N
         jLabel1.setText("Dashboard");
 
-        jLabel2.setFont(new java.awt.Font("MS Reference Sans Serif", 0, 10)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("MS Reference Sans Serif", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(102, 102, 102));
         jLabel2.setText("Selamat datang kembali! Lihat ringkasan event dan");
         jLabel2.setIconTextGap(0);
 
-        jLabel3.setFont(new java.awt.Font("MS Reference Sans Serif", 0, 10)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("MS Reference Sans Serif", 0, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(102, 102, 102));
         jLabel3.setText("aktivitas terbaru anda");
         jLabel3.setIconTextGap(0);
@@ -132,12 +135,12 @@ public class Dashboard extends javax.swing.JFrame {
             .addGroup(headerPanelLayout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addGroup(headerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 134, Short.MAX_VALUE)
-                .addComponent(dummyAddEvt, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45))
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 194, Short.MAX_VALUE)
+                .addComponent(dummyAddEvt, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(43, 43, 43))
         );
         headerPanelLayout.setVerticalGroup(
             headerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -146,20 +149,20 @@ public class Dashboard extends javax.swing.JFrame {
                     .addGroup(headerPanelLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel3))
                     .addGroup(headerPanelLayout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(dummyAddEvt, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(14, Short.MAX_VALUE))
+                        .addGap(33, 33, 33)
+                        .addComponent(dummyAddEvt, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(657, Short.MAX_VALUE))
         );
 
         mainPanel.add(headerPanel);
 
-        summary.setBackground(new java.awt.Color(222, 228, 215));
-        summary.setPreferredSize(new java.awt.Dimension(586, 327));
+        summary.setBackground(new java.awt.Color(255, 255, 255));
+        summary.setPreferredSize(new java.awt.Dimension(780, 412));
 
         jLayeredPane1.setBackground(new java.awt.Color(240, 214, 214));
         jLayeredPane1.setOpaque(true);
@@ -202,35 +205,33 @@ public class Dashboard extends javax.swing.JFrame {
         summaryLayout.setHorizontalGroup(
             summaryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(summaryLayout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addGroup(summaryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLayeredPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 227, Short.MAX_VALUE)
-                    .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addGap(32, 32, 32)
-                .addGroup(summaryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLayeredPane2)
-                    .addComponent(jLayeredPane4))
-                .addContainerGap(69, Short.MAX_VALUE))
+                .addGap(80, 80, 80)
+                .addGroup(summaryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLayeredPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 138, Short.MAX_VALUE)
+                .addGroup(summaryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLayeredPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLayeredPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(105, 105, 105))
         );
         summaryLayout.setVerticalGroup(
             summaryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(summaryLayout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addGroup(summaryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLayeredPane2)
-                    .addComponent(jLayeredPane1))
-                .addGroup(summaryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(summaryLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jLayeredPane3))
-                    .addGroup(summaryLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jLayeredPane4)))
-                .addContainerGap(155, Short.MAX_VALUE))
+                .addGap(39, 39, 39)
+                .addGroup(summaryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLayeredPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(59, 59, 59)
+                .addGroup(summaryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLayeredPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLayeredPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         mainPanel.add(summary);
 
+        recentEvt.setBackground(new java.awt.Color(255, 255, 255));
         recentEvt.setPreferredSize(new java.awt.Dimension(586, 80));
 
         jLabel4.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 14)); // NOI18N
@@ -264,7 +265,8 @@ public class Dashboard extends javax.swing.JFrame {
 
         jScrollPane1.setViewportView(mainPanel);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 10, 580, 480));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 10, 790, 780));
+        getContentPane().add(navbar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -302,7 +304,7 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JLayeredPane jLayeredPane4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel mainPanel;
-    private NgabarinUTS.Navbar navbar2;
+    private NgabarinUTS.Navbar navbar1;
     private javax.swing.JPanel recentEvt;
     private javax.swing.JPanel summary;
     private javax.swing.JLabel totalEvt;

@@ -1,5 +1,6 @@
 package NgabarinUTS;
 
+import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import java.awt.Color;
 import java.awt.Image;
@@ -14,7 +15,7 @@ public class Navbar extends javax.swing.JPanel {
         navBg.setIcon(new ImageIcon(
                 new ImageIcon(getClass().getResource("/assets/Rectangle 1.png"))
                 .getImage()
-                .getScaledInstance(230, 500, Image.SCALE_SMOOTH)
+                .getScaledInstance(270, 800, Image.SCALE_SMOOTH)
         ));
         
         logo.setIcon(new ImageIcon(
@@ -52,6 +53,9 @@ public class Navbar extends javax.swing.JPanel {
         pengaturanBtn.setIconTextGap(10);
         
         keluarBtn.putClientProperty( "JButton.buttonType", "roundRect" );
+        
+        cardNama.putClientProperty(FlatClientProperties.STYLE, 
+            "background: #6B8CAE; border: 0,0,0,0, #DEE4D7, 0f, 25;");
     }
     
     private void resetButtonStyle() {
@@ -95,6 +99,9 @@ public class Navbar extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         keluarBtn = new javax.swing.JButton();
+        cardNama = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         navBg = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -108,7 +115,7 @@ public class Navbar extends javax.swing.JPanel {
                 dashboardBtnMouseClicked(evt);
             }
         });
-        add(dashboardBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 118, 230, 33));
+        add(dashboardBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 270, 33));
 
         pengaturanBtn.setFont(new java.awt.Font("MS Reference Sans Serif", 0, 14)); // NOI18N
         pengaturanBtn.setForeground(new java.awt.Color(255, 255, 255));
@@ -119,7 +126,7 @@ public class Navbar extends javax.swing.JPanel {
                 pengaturanBtnMouseClicked(evt);
             }
         });
-        add(pengaturanBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 360, 230, 33));
+        add(pengaturanBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 410, 270, 33));
 
         eventBtn.setFont(new java.awt.Font("MS Reference Sans Serif", 0, 14)); // NOI18N
         eventBtn.setForeground(new java.awt.Color(255, 255, 255));
@@ -130,7 +137,7 @@ public class Navbar extends javax.swing.JPanel {
                 eventBtnMouseClicked(evt);
             }
         });
-        add(eventBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 157, 230, 33));
+        add(eventBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 270, 33));
 
         divisiBtn.setFont(new java.awt.Font("MS Reference Sans Serif", 0, 14)); // NOI18N
         divisiBtn.setForeground(new java.awt.Color(255, 255, 255));
@@ -141,7 +148,7 @@ public class Navbar extends javax.swing.JPanel {
                 divisiBtnMouseClicked(evt);
             }
         });
-        add(divisiBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 230, 33));
+        add(divisiBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 270, 33));
 
         manageBtn.setFont(new java.awt.Font("MS Reference Sans Serif", 0, 14)); // NOI18N
         manageBtn.setForeground(new java.awt.Color(255, 255, 255));
@@ -152,7 +159,7 @@ public class Navbar extends javax.swing.JPanel {
                 manageBtnMouseClicked(evt);
             }
         });
-        add(manageBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 230, 33));
+        add(manageBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 270, 33));
 
         progressBtn.setFont(new java.awt.Font("MS Reference Sans Serif", 0, 14)); // NOI18N
         progressBtn.setForeground(new java.awt.Color(255, 255, 255));
@@ -163,7 +170,7 @@ public class Navbar extends javax.swing.JPanel {
                 progressBtnMouseClicked(evt);
             }
         });
-        add(progressBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 280, 230, 33));
+        add(progressBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 330, 270, 33));
 
         laporanBtn.setFont(new java.awt.Font("MS Reference Sans Serif", 0, 14)); // NOI18N
         laporanBtn.setForeground(new java.awt.Color(255, 255, 255));
@@ -174,23 +181,59 @@ public class Navbar extends javax.swing.JPanel {
                 laporanBtnMouseClicked(evt);
             }
         });
-        add(laporanBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 230, 33));
-        add(logo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, 130, 60));
+        add(laporanBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 370, 270, 33));
+        add(logo, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, 180, 90));
 
-        jLabel1.setFont(new java.awt.Font("MS Reference Sans Serif", 0, 12)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("MS Reference Sans Serif", 0, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(204, 204, 204));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Kelola event dengan mudah");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 200, -1));
-        add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 230, -1));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 200, -1));
+        add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 143, 270, -1));
 
         keluarBtn.setText("Keluar");
         keluarBtn.setBorder(null);
-        add(keluarBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 443, 210, 30));
+        add(keluarBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 630, 210, 30));
+
+        cardNama.setBackground(new java.awt.Color(153, 153, 255));
+        cardNama.setOpaque(false);
+
+        jLabel2.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(235, 235, 235));
+        jLabel2.setText("NAMAKU");
+
+        jLabel3.setBackground(new java.awt.Color(204, 204, 204));
+        jLabel3.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel3.setText("Jabatan");
+
+        javax.swing.GroupLayout cardNamaLayout = new javax.swing.GroupLayout(cardNama);
+        cardNama.setLayout(cardNamaLayout);
+        cardNamaLayout.setHorizontalGroup(
+            cardNamaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(cardNamaLayout.createSequentialGroup()
+                .addGap(60, 60, 60)
+                .addGroup(cardNamaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(cardNamaLayout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jLabel3))
+                    .addComponent(jLabel2))
+                .addContainerGap(56, Short.MAX_VALUE))
+        );
+        cardNamaLayout.setVerticalGroup(
+            cardNamaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(cardNamaLayout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3)
+                .addContainerGap(35, Short.MAX_VALUE))
+        );
+
+        add(cardNama, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 500, 180, 100));
 
         navBg.setBackground(new java.awt.Color(0, 0, 255));
         navBg.setOpaque(true);
-        add(navBg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 230, 500));
+        add(navBg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 270, 800));
     }// </editor-fold>//GEN-END:initComponents
 
     private void dashboardBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dashboardBtnMouseClicked
@@ -244,10 +287,13 @@ public class Navbar extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel cardNama;
     private javax.swing.JLabel dashboardBtn;
     private javax.swing.JLabel divisiBtn;
     private javax.swing.JLabel eventBtn;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JButton keluarBtn;
     private javax.swing.JLabel laporanBtn;
