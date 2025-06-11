@@ -1,57 +1,105 @@
 package utils;
 
+import NgabarinUTS.SQLConnection;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.Statement;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import java.util.Iterator;
 
+import javax.swing.JOptionPane;
+
 public class SupabaseAPI {
+    private static final String SUPABASE_URL = "https://diaprxkkwimucqgtrtuz.supabase.co/rest/v1/";
+    private static final String SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRpYXByeGtrd2ltdWNxZ3RydHV6Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc0OTQ4NjA3MywiZXhwIjoyMDY1MDYyMDczfQ.cGvTGk6PDb5CIEDXtk-VR2LFVGrMPp7xx-71_KJbppg";
 
-    private static final String SUPABASE_URL = "https://diaprxkkwimucqgtrtuz.supabase.co";
-    private static final String SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRpYXByeGtrd2ltdWNxZ3RydHV6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDk0ODYwNzMsImV4cCI6MjA2NTA2MjA3M30.y-bsAS2ra9wCub3C56_LM-hGNofmuLHqSBLQ98www3Y";
+    public static void postTableData(String tableName) {
+        SQLConnection connect;
+        String query = "SELECT * FROM " + tableName;
 
-    public static String getFormattedData(String table, String query) {
         try {
-            String endpoint = SUPABASE_URL + "/rest/v1/" + table + query;
-            URL url = new URL(endpoint);
-            HttpURLConnection con = (HttpURLConnection) url.openConnection();
-            con.setRequestMethod("GET");
-            con.setRequestProperty("apikey", SUPABASE_KEY);
-            con.setRequestProperty("Authorization", "Bearer " + SUPABASE_KEY);
-            con.setRequestProperty("Accept", "application/json");
+            connect = new SQLConnection();
+            Statement st = connect.con.createStatement();
+            ResultSet res = st.executeQuery(query);
 
-            BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-            StringBuilder content = new StringBuilder();
-            String inputLine;
-            while ((inputLine = in.readLine()) != null) {
-                content.append(inputLine);
+            SupabaseAPI api = new SupabaseAPI();
+            boolean isCleared = api.clearDataTable(tableName);
+            if (!isCleared) {
+                System.out.println("Gagal menghapus data lama dari Supabase.");
+                return;
             }
-            in.close();
-            con.disconnect();
 
-            // Parsing JSON array dan tampilkan semua kolom otomatis
-            JSONArray arr = new JSONArray(content.toString());
-            StringBuilder result = new StringBuilder();
+            ResultSetMetaData meta = res.getMetaData();
+            int columnCount = meta.getColumnCount();
 
-            for (int i = 0; i < arr.length(); i++) {
-                JSONObject obj = arr.getJSONObject(i);
-                Iterator<String> keys = obj.keys();
-                while (keys.hasNext()) {
-                    String key = keys.next();
-                    result.append(key).append(": ").append(obj.optString(key)).append("\n");
+            while (res.next()) {
+                JSONObject json = new JSONObject();
+                for (int i = 1; i <= columnCount; i++) {
+                    String columnName = meta.getColumnName(i);
+                    Object value = res.getObject(i);
+                    json.put(columnName, value);
                 }
-                result.append("\n"); // pemisah antar record
+
+                boolean sent = api.apiPost(tableName, json);
+                if (!sent) {
+                    System.out.println("Gagal mengirim data: " + json.toString());
+                }
+            }
+            System.out.println("Data berhasil dikirim");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private boolean apiPost(String tableName, JSONObject json) {
+        try {
+            URL url = new URL(SUPABASE_URL + tableName);
+            HttpURLConnection connect = (HttpURLConnection) url.openConnection();
+            connect.setRequestMethod("POST");
+
+            connect.setRequestProperty("apikey", SUPABASE_KEY);
+            connect.setRequestProperty("Authorization", "Bearer " + SUPABASE_KEY);
+            connect.setRequestProperty("Content-Type", "application/json");
+            connect.setRequestProperty("Prefer", "return=minimal");
+            connect.setDoOutput(true);
+
+            try (OutputStream os = connect.getOutputStream()) {
+                byte[] input = json.toString().getBytes("utf-8");
+                os.write(input, 0, input.length);
             }
 
-            return result.toString();
+            int code = connect.getResponseCode();
+            return (code == 201 || code == 204);
 
         } catch (Exception e) {
             e.printStackTrace();
-            return "Terjadi kesalahan: " + e.getMessage();
+            return false;
+        }
+    }
+
+    private boolean clearDataTable(String table_name) {
+        try {
+            URL url = new URL(SUPABASE_URL + table_name + "?id=gt.0");
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("DELETE");
+
+            conn.setRequestProperty("apikey", SUPABASE_KEY);
+            conn.setRequestProperty("Authorization", "Bearer " + SUPABASE_KEY);
+            conn.setRequestProperty("Content-Type", "application/json");
+            conn.setRequestProperty("Prefer", "return=representation");
+
+            int code = conn.getResponseCode();
+            return (code == 200 || code == 204);
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return false;
         }
     }
 }
-

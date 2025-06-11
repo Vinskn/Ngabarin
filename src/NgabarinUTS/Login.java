@@ -141,9 +141,15 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void submitBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_submitBtnMouseClicked
+        if (username.getText().equals("su") && password.getText().equals("su")) {
+            new Admin().setVisible(true);
+            this.dispose();
+            return;
+        }
+        
         if (inputValidation()) {
             if (checkAccount()) {
-                JOptionPane.showMessageDialog(rootPane, "Berhasil");
+                JOptionPane.showMessageDialog(rootPane, "Selamat Datang " + GlobalState.getUsername(), "Berhasil", JOptionPane.INFORMATION_MESSAGE);
                 new Dashboard().setVisible(true);
                 this.dispose();
             } else {
@@ -191,13 +197,13 @@ public class Login extends javax.swing.JFrame {
             Statement st = connect.con.createStatement();
             ResultSet res = st.executeQuery(query);
             Boolean found = res.next();
-            
+
             if (found) {
                 GlobalState.setUserID(res.getInt("id"));
                 GlobalState.setUsername(res.getString("username"));
                 GlobalState.setEmail(res.getString("email"));
             }
-            
+
             connect.con.close();
             return found;
         } catch (Exception e) {

@@ -200,6 +200,11 @@ public class Navbar extends javax.swing.JPanel {
 
         keluarBtn.setText("Keluar");
         keluarBtn.setBorder(null);
+        keluarBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                keluarBtnMouseClicked(evt);
+            }
+        });
         add(keluarBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 630, 210, 30));
 
         cardNama.setBackground(new java.awt.Color(153, 153, 255));
@@ -335,6 +340,14 @@ public class Navbar extends javax.swing.JPanel {
         }
 //        new Pengaturan.setVisible(true);
     }//GEN-LAST:event_pengaturanBtnMouseClicked
+
+    private void keluarBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_keluarBtnMouseClicked
+        Window parentWindow = SwingUtilities.getWindowAncestor(this);
+        if (parentWindow instanceof JFrame) {
+            parentWindow.dispose();
+        }
+        new Login().setVisible(true);
+    }//GEN-LAST:event_keluarBtnMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
