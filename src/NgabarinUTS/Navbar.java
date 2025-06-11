@@ -5,8 +5,12 @@ import com.formdev.flatlaf.extras.FlatSVGIcon;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.Panel;
+import java.awt.Window;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
+import utils.GlobalState;
 
 public class Navbar extends javax.swing.JPanel {   
     public Navbar() {
@@ -56,6 +60,9 @@ public class Navbar extends javax.swing.JPanel {
         
         cardNama.putClientProperty(FlatClientProperties.STYLE, 
             "background: #6B8CAE; border: 0,0,0,0, #DEE4D7, 0f, 25;");
+        
+        nama.setText(GlobalState.getUsername());
+        email.setText(GlobalState.getEmail());
     }
     
     private void resetButtonStyle() {
@@ -100,8 +107,8 @@ public class Navbar extends javax.swing.JPanel {
         jSeparator1 = new javax.swing.JSeparator();
         keluarBtn = new javax.swing.JButton();
         cardNama = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        nama = new javax.swing.JLabel();
+        email = new javax.swing.JLabel();
         navBg = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -198,35 +205,37 @@ public class Navbar extends javax.swing.JPanel {
         cardNama.setBackground(new java.awt.Color(153, 153, 255));
         cardNama.setOpaque(false);
 
-        jLabel2.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(235, 235, 235));
-        jLabel2.setText("NAMAKU");
+        nama.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 14)); // NOI18N
+        nama.setForeground(new java.awt.Color(235, 235, 235));
+        nama.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        nama.setText("NAMAKU");
 
-        jLabel3.setBackground(new java.awt.Color(204, 204, 204));
-        jLabel3.setForeground(new java.awt.Color(204, 204, 204));
-        jLabel3.setText("Jabatan");
+        email.setBackground(new java.awt.Color(204, 204, 204));
+        email.setForeground(new java.awt.Color(204, 204, 204));
+        email.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        email.setText("Jabatan");
 
         javax.swing.GroupLayout cardNamaLayout = new javax.swing.GroupLayout(cardNama);
         cardNama.setLayout(cardNamaLayout);
         cardNamaLayout.setHorizontalGroup(
             cardNamaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(cardNamaLayout.createSequentialGroup()
-                .addGap(60, 60, 60)
+                .addContainerGap()
                 .addGroup(cardNamaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(cardNamaLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jLabel3))
-                    .addComponent(jLabel2))
-                .addContainerGap(56, Short.MAX_VALUE))
+                        .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 10, Short.MAX_VALUE))
+                    .addComponent(nama, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         cardNamaLayout.setVerticalGroup(
             cardNamaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(cardNamaLayout.createSequentialGroup()
                 .addGap(25, 25, 25)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addComponent(nama)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(email)
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         add(cardNama, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 500, 180, 100));
@@ -241,6 +250,12 @@ public class Navbar extends javax.swing.JPanel {
         dashboardBtn.setOpaque(true);
         dashboardBtn.setBackground(Color.decode("#CED9E4"));
         dashboardBtn.setForeground(Color.black);
+        
+        Window parentWindow = SwingUtilities.getWindowAncestor(this);
+        if (parentWindow instanceof JFrame) {
+            parentWindow.dispose();
+        }
+        new Dashboard().setVisible(true);
     }//GEN-LAST:event_dashboardBtnMouseClicked
 
     private void eventBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eventBtnMouseClicked
@@ -248,6 +263,12 @@ public class Navbar extends javax.swing.JPanel {
         eventBtn.setOpaque(true);
         eventBtn.setBackground(Color.decode("#CED9E4"));
         eventBtn.setForeground(Color.black);
+        
+        Window parentWindow = SwingUtilities.getWindowAncestor(this);
+        if (parentWindow instanceof JFrame) {
+            parentWindow.dispose();
+        }
+        new Event().setVisible(true);
     }//GEN-LAST:event_eventBtnMouseClicked
 
     private void divisiBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_divisiBtnMouseClicked
@@ -255,6 +276,12 @@ public class Navbar extends javax.swing.JPanel {
         divisiBtn.setOpaque(true);
         divisiBtn.setBackground(Color.decode("#CED9E4"));
         divisiBtn.setForeground(Color.black);
+        
+        Window parentWindow = SwingUtilities.getWindowAncestor(this);
+        if (parentWindow instanceof JFrame) {
+            parentWindow.dispose();
+        }
+        new divisi().setVisible(true);
     }//GEN-LAST:event_divisiBtnMouseClicked
 
     private void manageBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageBtnMouseClicked
@@ -262,6 +289,12 @@ public class Navbar extends javax.swing.JPanel {
         manageBtn.setOpaque(true);
         manageBtn.setBackground(Color.decode("#CED9E4"));
         manageBtn.setForeground(Color.black);
+        
+        Window parentWindow = SwingUtilities.getWindowAncestor(this);
+        if (parentWindow instanceof JFrame) {
+            parentWindow.dispose();
+        }
+        new Manajement();
     }//GEN-LAST:event_manageBtnMouseClicked
 
     private void progressBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_progressBtnMouseClicked
@@ -269,6 +302,12 @@ public class Navbar extends javax.swing.JPanel {
         progressBtn.setOpaque(true);
         progressBtn.setBackground(Color.decode("#CED9E4"));
         progressBtn.setForeground(Color.black);
+        
+        Window parentWindow = SwingUtilities.getWindowAncestor(this);
+        if (parentWindow instanceof JFrame) {
+            parentWindow.dispose();
+        }
+        new Progress().setVisible(true);
     }//GEN-LAST:event_progressBtnMouseClicked
 
     private void laporanBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_laporanBtnMouseClicked
@@ -276,6 +315,12 @@ public class Navbar extends javax.swing.JPanel {
         laporanBtn.setOpaque(true);
         laporanBtn.setBackground(Color.decode("#CED9E4"));
         laporanBtn.setForeground(Color.black);
+        
+        Window parentWindow = SwingUtilities.getWindowAncestor(this);
+        if (parentWindow instanceof JFrame) {
+            parentWindow.dispose();
+        }
+//        new Laporan.setVisible(true);
     }//GEN-LAST:event_laporanBtnMouseClicked
 
     private void pengaturanBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pengaturanBtnMouseClicked
@@ -283,6 +328,12 @@ public class Navbar extends javax.swing.JPanel {
         pengaturanBtn.setOpaque(true);
         pengaturanBtn.setBackground(Color.decode("#CED9E4"));
         pengaturanBtn.setForeground(Color.black);
+        
+        Window parentWindow = SwingUtilities.getWindowAncestor(this);
+        if (parentWindow instanceof JFrame) {
+            parentWindow.dispose();
+        }
+//        new Pengaturan.setVisible(true);
     }//GEN-LAST:event_pengaturanBtnMouseClicked
 
 
@@ -290,15 +341,15 @@ public class Navbar extends javax.swing.JPanel {
     private javax.swing.JPanel cardNama;
     private javax.swing.JLabel dashboardBtn;
     private javax.swing.JLabel divisiBtn;
+    private javax.swing.JLabel email;
     private javax.swing.JLabel eventBtn;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JButton keluarBtn;
     private javax.swing.JLabel laporanBtn;
     private javax.swing.JLabel logo;
     private javax.swing.JLabel manageBtn;
+    private javax.swing.JLabel nama;
     private javax.swing.JLabel navBg;
     private javax.swing.JLabel pengaturanBtn;
     private javax.swing.JLabel progressBtn;

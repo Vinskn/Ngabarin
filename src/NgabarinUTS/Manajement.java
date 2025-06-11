@@ -3,17 +3,21 @@ package NgabarinUTS;
 import com.formdev.flatlaf.FlatLightLaf;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import java.awt.Color;
+import java.sql.ResultSet;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
+import utils.Dash_cardEvt;
+import utils.GlobalState;
 import utils.ManageBar;
 import utils.RoundedBorder;
 
 public class Manajement extends javax.swing.JFrame {
     SQLConnection connect;
+    private int leaderingEvt;
     public Manajement() {
-        connect = new SQLConnection();
         initComponents();        
         setSize(1120, 820);
         setResizable(false);
@@ -25,16 +29,19 @@ public class Manajement extends javax.swing.JFrame {
         addBtn.setIcon(new FlatSVGIcon("assets/tambahBtn.svg", addBtn.getWidth(), addBtn.getHeight()));
         tugas.putClientProperty("JTextField.placeholderText", "Judul Tugas");
         tugas.setBorder(new RoundedBorder(Color.GRAY, 10, 1));
-        divisi.putClientProperty("JTextField.placeholderText", "Masukan Divisi");
+        divisi.putClientProperty("JTextField.placeholderText", "Masukan Divisi (Case Sensitive)");
         divisi.setBorder(new RoundedBorder(Color.GRAY, 10, 1));
         deskripsi.setBorder(new RoundedBorder(Color.GRAY, 10, 1));
         
         tabelHeader.setIcon(new FlatSVGIcon("assets/tableHeaderManajement.svg", tabelHeader.getWidth() + 3, tabelHeader.getHeight() + 3));
         
-        for (int i = 0; i < 15; i++) {
-            ManageBar barData = new ManageBar();
-            dataPanel.add(barData);
-            dataPanel.add(Box.createVerticalStrut(10));
+        if (checkLeader()) {
+            setVisible(true);
+            showTasksData();
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Anda bukan ketua Event, buat event untuk akses halaman ini", "Tidak bisa Akses", JOptionPane.INFORMATION_MESSAGE);
+            this.dispose();
+            new Dashboard().setVisible(true);
         }
     }
 
@@ -94,6 +101,12 @@ public class Manajement extends javax.swing.JFrame {
         deskripsi.setBorder(null);
         jScrollPane1.setViewportView(deskripsi);
 
+        addBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                addBtnMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout formAddLayout = new javax.swing.GroupLayout(formAdd);
         formAdd.setLayout(formAddLayout);
         formAddLayout.setHorizontalGroup(
@@ -102,15 +115,15 @@ public class Manajement extends javax.swing.JFrame {
                 .addGap(29, 29, 29)
                 .addGroup(formAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(formAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel3)
-                        .addComponent(jLabel2)
                         .addComponent(divisi, javax.swing.GroupLayout.DEFAULT_SIZE, 283, Short.MAX_VALUE)
-                        .addComponent(tugas))
+                        .addComponent(tugas)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 99, Short.MAX_VALUE)
                 .addGroup(formAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(35, Short.MAX_VALUE))
         );
         formAddLayout.setVerticalGroup(
@@ -152,15 +165,15 @@ public class Manajement extends javax.swing.JFrame {
                 .addComponent(navbar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(29, 29, 29)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 786, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(formAdd, javax.swing.GroupLayout.DEFAULT_SIZE, 786, Short.MAX_VALUE)
-                                .addComponent(tabelHeader, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                .addComponent(tabelHeader, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(15, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -183,6 +196,33 @@ public class Manajement extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void addBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addBtnMouseClicked
+        String query = "CALL upsertTasks('"
+            + tugas.getText() + "','"
+            + deskripsi.getText() + "',"
+            + 0 + ",'"
+            + divisi.getText() + "',"
+            + leaderingEvt + ")";
+
+        try {
+            connect = new SQLConnection();
+            java.sql.Statement st = connect.con.createStatement();
+            st.executeUpdate(query);
+            JOptionPane.showMessageDialog(this, "Tugas Ditambahkan", "Informasi Tambah Tugas", JOptionPane.INFORMATION_MESSAGE);
+            
+            tugas.setText("");
+            deskripsi.setText("");
+            divisi.setText("");
+            
+            dataPanel.removeAll();
+            dataPanel.revalidate();
+            dataPanel.repaint();
+            showTasksData();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "GAGAL: " + e.getMessage());
+        }
+    }//GEN-LAST:event_addBtnMouseClicked
+
     public static void main(String args[]) {
         try {
             UIManager.setLookAndFeel(new FlatLightLaf());
@@ -195,6 +235,47 @@ public class Manajement extends javax.swing.JFrame {
                 new Manajement().setVisible(true);
             }
         });
+    }
+    
+    private boolean checkLeader(){
+        int globalUsrID = GlobalState.getUserID();
+        String query = "SELECT * FROM event_table WHERE id_ketuaEvent = " + globalUsrID;
+        try {
+            connect = new SQLConnection();
+            java.sql.Statement st = connect.con.createStatement();
+            ResultSet res = st.executeQuery(query); 
+            while (res.next()) {                
+                if (res.getInt("id_ketuaEvent") == globalUsrID) {
+                    leaderingEvt = res.getInt("eventID");
+                    return true;
+                } 
+            }
+            connect.con.close();
+        } catch (Exception e) {
+            System.out.println("Gagal Mengambil data" + e.getMessage());
+        }
+        return false;
+    }
+    
+    private void showTasksData(){
+        String query = "CALL GetTasksByEventID("+ leaderingEvt +")";
+        try {
+            connect = new SQLConnection();
+            java.sql.Statement st = connect.con.createStatement();
+            ResultSet res = st.executeQuery(query); 
+            while (res.next()) {                
+                ManageBar barData = new ManageBar(
+                        res.getString("nama_tugas"),
+                        res.getString("nama_divisi"),
+                        res.getInt("status")
+                );
+                dataPanel.add(barData);
+                dataPanel.add(Box.createVerticalStrut(10));
+            }
+            connect.con.close();
+        } catch (Exception e) {
+            System.out.println("Gagal Mengambil data" + e.getMessage());
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

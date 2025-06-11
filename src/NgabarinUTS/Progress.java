@@ -2,16 +2,21 @@ package NgabarinUTS;
 
 import com.formdev.flatlaf.FlatLightLaf;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
+import java.sql.ResultSet;
 import java.awt.Color;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.UIManager;
+import utils.GlobalState;
 import utils.progressCard;
 
 public class Progress extends javax.swing.JFrame {
     SQLConnection connect;
+    
+    private int countCompltTask = 0;
+    private int totalTasks = 0;
+    
     public Progress() {
-        connect = new SQLConnection();
         initComponents();        
         setSize(1120, 820);
         setResizable(false);
@@ -22,13 +27,7 @@ public class Progress extends javax.swing.JFrame {
         
         bg.setIcon(new FlatSVGIcon("assets/cardBg.svg", bg.getWidth() + 5, bg.getHeight() + 5));
         
-        progressBar.setValue(70);
-        
-        for (int i = 0; i < 5; i++) {
-            progressCard data = new progressCard(String.valueOf(i));
-            panelData.add(data);
-            panelData.add(Box.createVerticalStrut(10));
-        }
+        getData();
     }
 
     @SuppressWarnings("unchecked")
@@ -37,7 +36,6 @@ public class Progress extends javax.swing.JFrame {
 
         navbar1 = new NgabarinUTS.Navbar();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -54,10 +52,6 @@ public class Progress extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 24)); // NOI18N
         jLabel1.setText("Progress Tugas");
-
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel2.setText("Logistik");
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -82,10 +76,12 @@ public class Progress extends javax.swing.JFrame {
 
         percent.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         percent.setText("70%");
+        percent.setPreferredSize(new java.awt.Dimension(52, 16));
 
         jLabel5.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 12)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(117, 117, 117));
         jLabel5.setText("Progress Keseluruhan");
+        jLabel5.setPreferredSize(new java.awt.Dimension(145, 16));
 
         jScrollPane1.setBorder(null);
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -103,22 +99,20 @@ public class Progress extends javax.swing.JFrame {
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane1))
-                        .addGap(27, 27, 27))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(progressBar, javax.swing.GroupLayout.PREFERRED_SIZE, 748, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(progressBar, javax.swing.GroupLayout.PREFERRED_SIZE, 722, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(percent))
-                            .addComponent(jLabel5))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addComponent(percent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addGap(27, 27, 27))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -127,15 +121,13 @@ public class Progress extends javax.swing.JFrame {
                 .addComponent(navbar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(35, 35, 35)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
+                .addComponent(jLabel1)
                 .addGap(33, 33, 33)
-                .addComponent(jLabel5)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(progressBar, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(percent))
+                    .addComponent(percent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -155,11 +147,82 @@ public class Progress extends javax.swing.JFrame {
             }
         });
     }
+    
+    public void getData(){
+        int userID = GlobalState.getUserID();
+        
+        String query = "CALL GetTasks_uid("+ userID +")";
+        try {
+            connect = new SQLConnection();
+            java.sql.Statement st = connect.con.createStatement();
+            boolean hasResults = st.execute(query);
+            
+            if (hasResults) {
+                ResultSet res = st.getResultSet();
+                while (res.next()) {                
+                    progressCard data = new progressCard(
+                            res.getString("nama_tugas"),
+                            res.getString("deskripsi_tugas"),
+                            res.getString("nama_event"),
+                            res.getString("nama_divisi"),
+                            res.getInt("status_tugas"),
+                            res.getInt("id_tugas"),
+                            this
+                    );
+                    panelData.add(data);
+                    panelData.add(Box.createVerticalStrut(10));
+                    
+                    if (res.getInt("status_tugas") == 1) {
+                        countCompltTask ++;
+                    }
+                }
+                res.close();
+            }
+            
+            if (st.getMoreResults()) {
+                ResultSet res2 = st.getResultSet();
+                if (res2.next()) {
+                    totalTasks = res2.getInt("total_tasks_for_user");
+                }
+                res2.close();
+            }
+            
+            st.close();
+            connect.con.close();
+        } catch (Exception e) {
+            System.out.println("Gagal Mengambil data" + e.getMessage());
+        }
+        handleProgressbar();
+    }
+    
+    private void handleProgressbar() {
+        System.out.println(countCompltTask);
+        System.out.println(totalTasks);
+        
+        if (totalTasks > 0) {
+            int calc = (int) (((double) countCompltTask / totalTasks) * 100);
+            progressBar.setValue(calc);
+            percent.setText(calc + "%");
+        } else {
+            progressBar.setValue(0);
+            percent.setText("0%");
+        }
+    }
+    
+    public void refreshData() {
+        panelData.removeAll();
+        countCompltTask = 0;
+        totalTasks = 0;
+        getData();
+        panelData.revalidate();
+        panelData.repaint();
+    }
+
+ 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel bg;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

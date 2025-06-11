@@ -42,7 +42,7 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="300" y="10" width="790" height="780"/>
+          <AbsoluteConstraints x="300" y="10" width="790" height="660"/>
         </Constraint>
       </Constraints>
 
@@ -105,7 +105,7 @@
                                   <Component id="dummyAddEvt" min="-2" pref="66" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace pref="657" max="32767" attributes="0"/>
+                          <EmptySpace pref="537" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -144,6 +144,9 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JButton" name="dummyAddEvt">
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="dummyAddEvtMouseClicked"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -188,7 +191,7 @@
                               <Component id="jLayeredPane3" min="-2" max="-2" attributes="0"/>
                               <Component id="jLayeredPane4" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="35" max="32767" attributes="0"/>
+                          <EmptySpace pref="272" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>

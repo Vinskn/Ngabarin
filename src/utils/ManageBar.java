@@ -3,19 +3,18 @@ package utils;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 
 public class ManageBar extends javax.swing.JPanel {
-    private String judul_param = "Menyusun Agenda";
-    private String divisi_param = "Divisi";
-    private int status_param = 3;
-    public ManageBar() {
+    private String judul_param;
+    private String divisi_param;
+    private int status_param;
+    
+    public ManageBar(String judul_param, String divisi_param, int status_param) {
         initComponents();
-        divisi.setText(judul_param);
-        divisi.setText(judul_param);
+        judul.setText(judul_param);
+        divisi.setText(divisi_param);
         if (status_param == 0) {
-            status.setIcon(new FlatSVGIcon("assets/manage_selesai.svg", 95, 26));
-        } else if (status_param == 1) {
-            status.setIcon(new FlatSVGIcon("assets/manage_progress.svg", 95, 26));
-        } else {
             status.setIcon(new FlatSVGIcon("assets/manage_belum.svg", 95, 26));
+        } else {
+            status.setIcon(new FlatSVGIcon("assets/manage_selesai.svg", 95, 26));
         }
     }
 

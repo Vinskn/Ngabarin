@@ -6,11 +6,13 @@ package NgabarinUTS;
 import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.FlatLightLaf;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
+import com.mysql.cj.xdevapi.Statement;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.sql.ResultSet;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -25,9 +27,11 @@ import utils.GlobalState;
 
 public class Dashboard extends javax.swing.JFrame {
     SQLConnection connect;
+    private int counterEvent = 0;
+    private int counterTotalTask = 0;
+    private int counterOngoingTask = 0;
 
     public Dashboard() {
-        connect = new SQLConnection();
         initComponents();        
         setSize(1120, 820);
         setResizable(false);
@@ -60,14 +64,9 @@ public class Dashboard extends javax.swing.JFrame {
         cont_totalTugas.setIcon(new FlatSVGIcon("assets/dash-totalTugas.svg", cont_totalEvt.getWidth() + 5, cont_totalEvt.getHeight() + 5));
         cont_tugasSelesai.setIcon(new FlatSVGIcon("assets/dash-tugasSelesai.svg", cont_totalEvt.getWidth() + 5, cont_totalEvt.getHeight() + 5));
         
-
-        for (int i = 0; i < 5; i++) {
-            Dash_cardEvt cardList = new Dash_cardEvt();
-            mainPanel.add(cardList);
-            mainPanel.add(Box.createVerticalStrut(10));
-        }
+        getSummaryData();
+        getRecentData();
         
-        System.out.println(GlobalState.getUsername());
     }
     
 
@@ -128,6 +127,12 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel3.setText("aktivitas terbaru anda");
         jLabel3.setIconTextGap(0);
 
+        dummyAddEvt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                dummyAddEvtMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout headerPanelLayout = new javax.swing.GroupLayout(headerPanel);
         headerPanel.setLayout(headerPanelLayout);
         headerPanelLayout.setHorizontalGroup(
@@ -156,7 +161,7 @@ public class Dashboard extends javax.swing.JFrame {
                     .addGroup(headerPanelLayout.createSequentialGroup()
                         .addGap(33, 33, 33)
                         .addComponent(dummyAddEvt, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(657, Short.MAX_VALUE))
+                .addContainerGap(537, Short.MAX_VALUE))
         );
 
         mainPanel.add(headerPanel);
@@ -226,7 +231,7 @@ public class Dashboard extends javax.swing.JFrame {
                 .addGroup(summaryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLayeredPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLayeredPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(272, Short.MAX_VALUE))
         );
 
         mainPanel.add(summary);
@@ -265,11 +270,16 @@ public class Dashboard extends javax.swing.JFrame {
 
         jScrollPane1.setViewportView(mainPanel);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 10, 790, 780));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 10, 790, 660));
         getContentPane().add(navbar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void dummyAddEvtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dummyAddEvtMouseClicked
+        new Event().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_dummyAddEvtMouseClicked
 
     
     
@@ -283,6 +293,56 @@ public class Dashboard extends javax.swing.JFrame {
                 new Dashboard().setVisible(true);
             }
         });
+    }
+    
+    private void getRecentData(){
+        String globalUsername = GlobalState.getUsername();
+        String query = "CALL GetEvents('"+ globalUsername +"')";
+        
+        try {
+            connect = new SQLConnection();
+            java.sql.Statement st = connect.con.createStatement();
+            ResultSet res = st.executeQuery(query);
+            
+
+            while(res.next()){
+                Dash_cardEvt cardList = new Dash_cardEvt(
+                        res.getString("nama_event"), 
+                        res.getString("tanggal_pelaksanaan"),
+                        res.getString("deskripsi"),
+                        res.getInt("status")
+                );
+                mainPanel.add(cardList);
+                mainPanel.add(Box.createVerticalStrut(10));
+            }
+            connect.con.close();
+        } catch (Exception e) {
+            System.out.println("Gagal Mengambil data" + e.getMessage());
+        }
+    }
+    
+    private void getSummaryData(){
+        int globalUID = GlobalState.getUserID();
+        String query = "CALL TasksCounter('"+ globalUID +"')";
+        
+        try {
+            connect= new SQLConnection();
+            java.sql.Statement st = connect.con.createStatement();
+            ResultSet res = st.executeQuery(query);
+            
+            while(res.next()) {
+                counterEvent++;
+                counterTotalTask += res.getInt("total_tasks_in_event");
+                counterOngoingTask += res.getInt("ongoing_tasks");
+            }
+            
+            totalEvt.setText(String.valueOf(counterEvent));
+            eventAktif.setText(String.valueOf(counterEvent));
+            totalTugas.setText(String.valueOf(counterTotalTask));
+            tugasSelesai.setText(String.valueOf(counterTotalTask - counterOngoingTask));
+        } catch (Exception e) {
+            System.out.println("Gagal Mengambil data" + e.getMessage());
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

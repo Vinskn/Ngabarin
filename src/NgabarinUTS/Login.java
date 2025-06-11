@@ -18,7 +18,7 @@ public class Login extends javax.swing.JFrame {
     public Login() {
         
         initComponents();        
-        setSize(1120, 820); 
+        setSize(1120, 820);     
         setResizable(false);
         setLocationRelativeTo(null);
         getContentPane().setBackground(Color.WHITE);
@@ -195,6 +195,7 @@ public class Login extends javax.swing.JFrame {
             if (found) {
                 GlobalState.setUserID(res.getInt("id"));
                 GlobalState.setUsername(res.getString("username"));
+                GlobalState.setEmail(res.getString("email"));
             }
             
             connect.con.close();
