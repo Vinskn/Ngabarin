@@ -28,31 +28,31 @@ public class Navbar extends javax.swing.JPanel {
                 .getScaledInstance(130, 60, Image.SCALE_SMOOTH)
         ));
         
-        FlatSVGIcon dashboardIcn = new FlatSVGIcon("assets/dashboard.svg", 20, 20);
+        FlatSVGIcon dashboardIcn = new FlatSVGIcon("/assets/dashboard.svg", 20, 20);
         dashboardBtn.setIcon(dashboardIcn);
         dashboardBtn.setIconTextGap(10);
         
-        FlatSVGIcon eventIcn = new FlatSVGIcon("assets/event.svg", 20, 20);
+        FlatSVGIcon eventIcn = new FlatSVGIcon("/assets/event.svg", 20, 20);
         eventBtn.setIcon(eventIcn);
         eventBtn.setIconTextGap(10);
         
-        FlatSVGIcon divisiIcn = new FlatSVGIcon("assets/group.svg", 20, 20);
+        FlatSVGIcon divisiIcn = new FlatSVGIcon("/assets/group.svg", 20, 20);
         divisiBtn.setIcon(divisiIcn);
         divisiBtn.setIconTextGap(10);
         
-        FlatSVGIcon manageIcn = new FlatSVGIcon("assets/assignment.svg", 20, 20);
+        FlatSVGIcon manageIcn = new FlatSVGIcon("/assets/assignment.svg", 20, 20);
         manageBtn.setIcon(manageIcn);
         manageBtn.setIconTextGap(10);
         
-        FlatSVGIcon progressIcn = new FlatSVGIcon("assets/progress.svg", 20, 20);
+        FlatSVGIcon progressIcn = new FlatSVGIcon("/assets/progress.svg", 20, 20);
         progressBtn.setIcon(progressIcn);
         progressBtn.setIconTextGap(10);
         
-        FlatSVGIcon laporanIcn = new FlatSVGIcon("assets/report.svg", 20, 20);
+        FlatSVGIcon laporanIcn = new FlatSVGIcon("/assets/report.svg", 20, 20);
         laporanBtn.setIcon(laporanIcn);
         laporanBtn.setIconTextGap(10);
         
-        FlatSVGIcon pengaturanIcn = new FlatSVGIcon("assets/gear.svg", 20, 20);
+        FlatSVGIcon pengaturanIcn = new FlatSVGIcon("/assets/gear.svg", 20, 20);
         pengaturanBtn.setIcon(pengaturanIcn);
         pengaturanBtn.setIconTextGap(10);
         

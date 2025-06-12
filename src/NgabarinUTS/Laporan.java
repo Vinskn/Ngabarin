@@ -23,7 +23,6 @@ public class Laporan extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        navbar1 = new NgabarinUTS.Navbar();
         Pengaturan = new javax.swing.JLabel();
         formAdd = new javax.swing.JPanel();
         addBtn = new javax.swing.JLabel();
@@ -62,55 +61,40 @@ public class Laporan extends javax.swing.JFrame {
         formAdd.setPreferredSize(new java.awt.Dimension(780, 250));
 
         Notifikasi.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        Notifikasi.setForeground(new java.awt.Color(0, 0, 0));
         Notifikasi.setText("Notifikasi   :");
 
-        Email.setForeground(new java.awt.Color(0, 0, 0));
         Email.setText("📬 Email Notifikasi      : ");
 
-        Push.setForeground(new java.awt.Color(0, 0, 0));
         Push.setText("📱 Notifikasi Push       :");
 
-        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setText("🔔 Jenis Notifikasi       :");
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(0, 0, 0));
         jLabel11.setText("Keamanan      :");
 
-        jLabel12.setForeground(new java.awt.Color(0, 0, 0));
         jLabel12.setText("🔑 Ganti Password");
 
-        jLabel13.setForeground(new java.awt.Color(0, 0, 0));
         jLabel13.setText("🔐 Autentikasi Dua Faktor: [✓] Aktif");
 
-        jLabel14.setForeground(new java.awt.Color(0, 0, 0));
         jLabel14.setText("📱 Kelola Perangkat Aktif");
 
         jLabel15.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel15.setForeground(new java.awt.Color(0, 0, 0));
         jLabel15.setText("Bantuan & Informasi");
 
-        jLabel16.setForeground(new java.awt.Color(0, 0, 0));
         jLabel16.setText("📄  Syarat dan Ketentuan");
 
-        jLabel17.setForeground(new java.awt.Color(0, 0, 0));
         jLabel17.setText("🔒  Kebijakan Privasi");
 
-        jLabel18.setForeground(new java.awt.Color(0, 0, 0));
         jLabel18.setText("❓  Pusat Bantuan");
 
-        jLabel19.setForeground(new java.awt.Color(0, 0, 0));
         jLabel19.setText("📧  Hubungi Support");
 
         jPanel2.setBackground(new java.awt.Color(204, 255, 255));
 
         jLabel2.setFont(new java.awt.Font("MS Reference Sans Serif", 0, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Mana Lengkap  : ");
 
         jLabel3.setFont(new java.awt.Font("MS Reference Sans Serif", 0, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Email                 :");
 
         jTextField1.setBackground(new java.awt.Color(204, 204, 204));
@@ -128,16 +112,16 @@ public class Laporan extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField2))
+                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(454, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -153,7 +137,6 @@ public class Laporan extends javax.swing.JFrame {
                 .addGap(35, 35, 35))
         );
 
-        jCheckBox1.setForeground(new java.awt.Color(0, 0, 0));
         jCheckBox1.setSelected(true);
         jCheckBox1.setText("AKTIF");
         jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
@@ -162,14 +145,11 @@ public class Laporan extends javax.swing.JFrame {
             }
         });
 
-        jCheckBox3.setForeground(new java.awt.Color(0, 0, 0));
         jCheckBox3.setText("Tidak Aktif");
 
-        jCheckBox2.setForeground(new java.awt.Color(0, 0, 0));
         jCheckBox2.setSelected(true);
         jCheckBox2.setText("Tugas Baru");
 
-        jCheckBox4.setForeground(new java.awt.Color(0, 0, 0));
         jCheckBox4.setSelected(true);
         jCheckBox4.setText("Perubahan Jadwal");
 
@@ -281,21 +261,16 @@ public class Laporan extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(navbar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addComponent(Pengaturan))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(formAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 786, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(58, 58, 58)
+                .addComponent(formAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 786, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(26, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(69, 69, 69)
+                .addComponent(Pengaturan)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(navbar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(31, 31, 31)
                 .addComponent(Pengaturan)
@@ -355,6 +330,5 @@ public class Laporan extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
-    private NgabarinUTS.Navbar navbar1;
     // End of variables declaration//GEN-END:variables
 }
