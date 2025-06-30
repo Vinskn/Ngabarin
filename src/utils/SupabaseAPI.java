@@ -16,8 +16,8 @@ import java.util.Iterator;
 import javax.swing.JOptionPane;
 
 public class SupabaseAPI {
-    private static final String SUPABASE_URL = "https://diaprxkkwimucqgtrtuz.supabase.co/rest/v1/";
-    private static final String SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRpYXByeGtrd2ltdWNxZ3RydHV6Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc0OTQ4NjA3MywiZXhwIjoyMDY1MDYyMDczfQ.cGvTGk6PDb5CIEDXtk-VR2LFVGrMPp7xx-71_KJbppg";
+    private static final String SUPABASE_URL = "https://...";
+    private static final String SUPABASE_KEY = "ey...";
 
     public static void postTableData(String tableName) {
         SQLConnection connect;
